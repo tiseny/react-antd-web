@@ -9,27 +9,27 @@ const FormItem = Form.Item;
 @Form.create()
 class Login extends React.PureComponent {
 
-    constructor(props) {
-    	super(props);
-    	this.state = {
-    		passwordDirty: false,
-    		loginBtnText: '登录'
-    	};
-    }
+  constructor(props) {
+  	super(props);
+  	this.state = {
+  		passwordDirty: false,
+  		loginBtnText: '登录'
+  	};
+  }
 
-  	handleSubmit = (e) => { // 登录
-    	e.preventDefault();
-        const {actions, form} = this.props;
-	    form.validateFieldsAndScroll((err, values) => {
-		    if (!err) {
-          let username = values.username, // 用户名
-              password = values.password, // 密码
-              loginParams = { // 登录参数
-                  username: username,
-                  password: password	
-              };
-		    }
-	    });
+	handleSubmit = (e) => { // 登录
+  	e.preventDefault();
+      const {actions, form} = this.props;
+    form.validateFieldsAndScroll((err, values) => {
+	    if (!err) {
+        let username = values.username, // 用户名
+            password = values.password, // 密码
+            loginParams = { // 登录参数
+                username: username,
+                password: password	
+            };
+	    }
+    });
 	}
 
 	// 验证用户名
@@ -56,10 +56,12 @@ class Login extends React.PureComponent {
 	render() {
     const { loading, loginInfo, form } = this.props;
     const getFieldDecorator = form.getFieldDecorator;
+
 		return (
 			<div className="login-container">	
+				<div className="inner-background"></div>
 				<div className="login-form">
-					<Spin tip="载入中..." spinning={loading}>
+					<Spin tip="载入中..." spinning={false}>
 						<div className="login-logo">
 				       <span>Ant Design</span>
 				    </div>
@@ -101,7 +103,7 @@ class Login extends React.PureComponent {
 	        </Spin>
 				</div>
 			</div>
-		);
+		)
 	}
 }
 

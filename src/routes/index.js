@@ -8,11 +8,11 @@ export default {
   path: baseAlias || '/',
   component: require('../views').default,
   indexRoute: {
-    component: require('../views/dashboard').default,
-    onEnter: redirect(`${baseAlias}/dashboard`)
+    component: require('../views/home').default,
+    onEnter: redirect(`${baseAlias}/home`)
   },
   childRoutes: [
-    require('./dashboard'),
+    require('./home'),
     require('./help'),
     require('./need'),
     require('./setup'),

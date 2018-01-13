@@ -1,21 +1,32 @@
+
 .login-container {
     position: relative;
     width: 100%;
-    height: 100vh;
-    background: url(https://welogix-web-cdn.b0.upaiyun.com/assets/img/login-splash-bg-port.jpg) no-repeat center center;
-    background-size: cover;
+    height: 100%;
+
+    .inner-background{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: url(../../static/images/bg.jpg);
+      background-size: cover;
+      filter: blur(3px);
+  }
+
 }
+
 .login-form {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -160px 0 0 -160px;
+    margin: -175px 0 0 -160px;
     width: 320px;
-    height: 320px;
+    height: 350px;
     padding: 36px;
     box-shadow: 0 0 100px rgba(0, 0, 0, .08);
     background-color: #fff;
     border-radius: 4px;
+    overflow: hidden;
     button {
         width: 100%;
     }
@@ -52,4 +63,5 @@
 .ant-spin-container,
 .ant-spin-nested-loading {
     height: 100%;
+    overflow: hidden;
 }

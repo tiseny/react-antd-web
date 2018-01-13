@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Dashboard extends React.PureComponent {
+class home extends React.PureComponent {
 
   render() {
     return <section>
@@ -9,4 +9,4 @@ class Dashboard extends React.PureComponent {
   }
 }
 
-export default Dashboard
+export default home

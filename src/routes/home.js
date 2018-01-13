@@ -1,8 +1,8 @@
 module.exports = {
-  path: 'dashboard',
+  path: 'home',
   getComponent(location, cb) {
     require.ensure([], (require) => {
-      cb(null, require('../views/dashboard').default)
+      cb(null, require('../views/home').default)
     })
   }
 }
