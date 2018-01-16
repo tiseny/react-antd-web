@@ -1,6 +1,10 @@
-import React, { Component } from 'react'; // 引入了React
+import React, { Component } from 'react'; 
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+import { actions as userActionCreators } from '../../redux/modules/user'
+
 import { Spin, Form, Input, Button, message } from 'antd';
 import './index.less';
 
@@ -17,72 +21,34 @@ class Login extends React.PureComponent {
   	};
   }
 
-	handleSubmit = (e) => { // 登录
-  	e.preventDefault();
-      const {actions, form} = this.props;
-    form.validateFieldsAndScroll((err, values) => {
-	    if (!err) {
-        let username = values.username, // 用户名
-            password = values.password, // 密码
-            loginParams = { // 登录参数
-                username: username,
-                password: password	
-            };
-	    }
-    });
-	}
-
-	// 验证用户名
-	checkUsername = (rule, value, callback) => {
-		const form = this.props.form;
-      if (!value) {
-        callback();
-      } else if (!Config.checkEng(value)) {
-    		callback(Config.message.usernameEng);
-	    } else {
-	    	callback();
-	    }
-	}
-
-	// 验证密码
-	checkPassword = (rule, value, callback) => {
-		const form = this.props.form;
-	    if (value && this.state.passwordDirty) {
-	    	form.validateFields(['confirm'], { force: true });
-	    }
-	    callback();
-	}
-
 	render() {
-    const { loading, loginInfo, form } = this.props;
+    const { loginPending, form } = this.props;
     const getFieldDecorator = form.getFieldDecorator;
 
 		return (
 			<div className="login-container">	
 				<div className="inner-background"></div>
 				<div className="login-form">
-					<Spin tip="载入中..." spinning={false}>
+					<Spin tip="载入中..." spinning={loginPending}>
 						<div className="login-logo">
 				       <span>Ant Design</span>
 				    </div>
-						<Form onSubmit={this.handleSubmit}>
+						<Form onSubmit={this.handleSubmit.bind(this)}>
 			        <FormItem hasFeedback>
                 {getFieldDecorator('username', { 
-                	initialValue: 'sosout', 
+                	initialValue: 'admin', 
                 	rules: [
-                		{ required: true, message: '' }, 
-                		{ validator: this.checkUsername }
+                		{ required: true, message: '用户名不能为空' }, 
                 	]})(
-                  <Input size="large" placeholder="用户名" maxLength="6" />
+                  <Input size="large" placeholder="用户名" />
                 )}
 			        </FormItem>
 			        <FormItem hasFeedback>
                 {getFieldDecorator('password', { 
                 	rules: [
-                		{ required: true, message: '' }, 
-                		{ validator: this.checkPassword }
+                		{ required: true, message: '密码不能为空' }
                 	]})(
-                  <Input size="large" type="password" placeholder="密码" maxLength="6" />
+                  <Input size="large" type="password" placeholder="密码" />
                 )}
 			        </FormItem>
 			        <FormItem>
@@ -90,14 +56,14 @@ class Login extends React.PureComponent {
 			          	type="primary" 
 			          	htmlType="submit" 
 			          	size="large" 
-			          	loading={loginInfo && loginInfo.length > 0 ? true : false}
+			          	loading={loginPending}
 			          >
-			          	{loginInfo && loginInfo.length > 0 ? '登录中...' : '登录'}
+			          	{loginPending ? '登录中...' : '登录'}
 			          </Button>
 			        </FormItem>
 			        <div className="login-account">
-                <span>账号：sosout</span>
-                <span>密码：sosout</span>
+                <span>账号：admin</span>
+                <span>密码：123456</span>
 			        </div>
 		        </Form>
 	        </Spin>
@@ -105,6 +71,46 @@ class Login extends React.PureComponent {
 			</div>
 		)
 	}
+
+	handleSubmit(e) { // 登录
+  	e.preventDefault();
+
+    const {actions, form} = this.props;
+
+    localStorage.removeItem('username')
+
+    form.validateFieldsAndScroll((err, values) => {
+	    if (!err) {
+	    	let username = values.username
+	    	let password = values.password
+
+	    	if (username === 'admin' && password === '123456') {
+	    		actions.login({
+	    			username,
+	    			password
+	    		})		
+
+	    		// 
+	    		localStorage.setItem('username', username)
+
+	    		browserHistory.push('/')
+
+	    	} else{
+
+	    		message.error('用户名或者密码错误')
+	    	}
+	    }
+    });
+	}
+
 }
 
-export default Login;
+const stateToProps = state => ({
+  ...state.user
+})
+
+const dispatchToProps = dispatch => ({
+  actions: bindActionCreators(userActionCreators, dispatch)
+})
+
+export default connect(stateToProps, dispatchToProps)(Login);

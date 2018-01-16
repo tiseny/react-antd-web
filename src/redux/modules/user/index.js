@@ -23,14 +23,8 @@ const FETCH_USER_LOGOUT_SUCCESS = Symbol('FETCH_USER_LOGOUT_SUCCESS')
 // ------------------------------------
 
 // 用户登录
-export const fetchUserLogin = (params, callback) => {
-  let returnUrl = getQuery('return_url')
-
-  if (returnUrl) {
-    returnUrl = decodeURIComponent(returnUrl).replace(`${location.protocol}//${location.host}`, '')
-    localStorage.setItem('RETURN_URL', returnUrl)
-  }
-
+/*export const login = (params, callback) => {
+  
   const fetchOptions = getFetchOptions(getApiPath('user/login'), 'POST', {
     body: JSON.stringify(params)
   })
@@ -46,10 +40,10 @@ export const fetchUserLogin = (params, callback) => {
       ]
     }
   }
-}
+}*/
 
 // 用户登出
-export const fetchUserLogout = (callback) => {
+/*export const logout = (callback) => {
   const fetchOptions = getFetchOptions(getApiPath('user/logout'), 'POST')
 
   return {
@@ -63,13 +57,17 @@ export const fetchUserLogout = (callback) => {
       ]
     }
   }
-}
+}*/
+
+export const login = createAction(FETCH_USER_LOGIN_SUCCESS)
+export const logout = createAction(FETCH_USER_LOGOUT_SUCCESS)
+
 /**
  * 暴露actions到外面，方便使用react-redux connect绑定到Container Component
  */
 export const actions = {
-  fetchUserLogin,                               // 用户登录
-  fetchUserLogout,                              // 用户登出
+  login,                               // 用户登录
+  logout,                              // 用户登出
 }
 
 // ------------------------------------
@@ -96,6 +94,7 @@ export default handleActions({
 
   // 用户登录
   [FETCH_USER_LOGIN_SUCCESS](state) {
+    
     return {
       ...state,
       loginPending: false

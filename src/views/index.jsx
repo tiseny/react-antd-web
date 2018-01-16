@@ -3,7 +3,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { actions as userActionCreators } from '../redux/modules/user'
-
+import { browserHistory } from 'react-router';
 import { Layout } from 'antd';
 import { PageHeader, PageSide } from './layout'
 
@@ -16,6 +16,15 @@ class Main extends React.PureComponent {
 	state = {
 		collapsed: false
 	}
+
+  componentWillMount() {
+    const username = localStorage.getItem('username')
+    const pathname = window.location.pathname
+
+    if (!!username && new RegExp('^/login.*')) {
+      browserHistory.push('/')
+    }
+  }
 
   render() {
   	const { collapsed } = this.state

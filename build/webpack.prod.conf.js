@@ -18,7 +18,7 @@ const dllManifestDir = path.resolve(__dirname, './manifest/prod')
 const webpackConfig = merge(baseWebpackConfig, {
   devtool: '#source-map',
   entry: {
-    main: path.resolve(__dirname, '../src/main')
+    main: path.resolve(__dirname, '../src/app')
   },
   output: {
     path: path.resolve(__dirname, '../static/static'),
