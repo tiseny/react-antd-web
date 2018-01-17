@@ -1,34 +1,60 @@
 import React from 'react'
 import { Layout, Menu, Icon } from 'antd';
-const { Sider } = Layout;
+
+import { Link } from 'react-router';
+
+import { SIDE_MENU } from '../../constants'
+
+const Sider = Layout.Sider;
+const SubMenu = Menu.SubMenu;
 
 class PageSide extends React.PureComponent {
+
+  state = {
+    current: '1'
+  }
 
   render() {
     const { collapsed } = this.props
 
     return  <Sider
-        trigger={null}
-        collapsible
-        collapsedWidth={47}
-        collapsed={collapsed}
+      trigger={null}
+      collapsible
+      collapsedWidth={47}
+      collapsed={collapsed}
+    >
+      <div className="logo" />
+      <Menu
+        theme="dark"
+        onClick={this.handleClick}
+        defaultOpenKeys={['sub1']}
+        selectedKeys={[this.state.current]}
+        mode="inline"
       >
-        <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1">
-            <Icon type="user" />
-            <span>nav 1</span>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="video-camera" />
-            <span>nav 2</span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="upload" />
-            <span>nav 3</span>
-          </Menu.Item>
-        </Menu>
-      </Sider>
+        {
+          SIDE_MENU.map((item, key) => 
+            <SubMenu key={key} title={<span><Icon type={item.icon} /><span>{item.name}</span></span>}>
+              {
+                item.sub.map((subItem, subKey) => 
+                  <Menu.Item key={subKey}>
+                    <Link to={subItem.router}>
+                     {subItem.name}
+                    </Link>
+                  </Menu.Item>
+                )
+              }
+            </SubMenu>
+          )
+        }
+      </Menu>
+    </Sider>
+  }
+
+  handleClick = (e) => {
+    console.log('click ', e);
+    this.setState({
+      current: e.key,
+    });
   }
 }
 

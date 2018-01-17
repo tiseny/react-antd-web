@@ -113,18 +113,44 @@ body {
                 padding: 0 16px!important;
             }
         }
+        .ant-menu-dark.ant-menu-inline .ant-menu-item, 
+        .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title{
+            font-size: 12px;
+            height: 30px;
+            line-height: 30px;
+        }
     }
     .ant-layout-header{
+        height: 45px;
+        line-height: 45px;
+        overflow: hidden;
         .trigger{
-            font-size: 20px;
-            line-height: 64px;
+            font-size: 16px;
+            line-height: 45px;
             cursor: pointer;
             -webkit-transition: all .3s, padding 0s;
             transition: all .3s, padding 0s;
-            padding: 0 24px;
+            padding: 0 14px;
             &:hover{
                 background: #e6f7ff;
             }
+        }
+        .layout-header-menu{
+            float: right;
+            margin-right: 10px; 
+            line-height: 45px;
+            text-align: center;
+        }
+    }
+}
+
+
+.ant-menu-submenu-popup{
+    > .ant-menu-sub{
+        min-width: 60px;
+        > .ant-menu-item{
+            line-height: 30px;
+            height: auto;
         }
     }
 }

@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Layout, Icon } from 'antd';
+import { Layout, Icon, Menu } from 'antd'
 
-const { Header } = Layout;
+const SubMenu = Menu.SubMenu;
+const Header = Layout.Header;
 
 class PageHeader extends React.PureComponent {
 
@@ -13,7 +14,7 @@ class PageHeader extends React.PureComponent {
 
   render() {
 
-    const { collapsed, onToggle } = this.props
+    const { collapsed, onToggle, logout } = this.props
 
     return <Header style={{ background: '#fff', padding: 0 }}>
       <Icon
@@ -21,6 +22,11 @@ class PageHeader extends React.PureComponent {
         type={collapsed ? 'menu-unfold' : 'menu-fold'}
         onClick={onToggle}
       />
+      <Menu mode="horizontal" onClick={logout} className="layout-header-menu">
+        <SubMenu title={<span><Icon type="user" />admin</span>}>
+          <Menu.Item key="logout">注销</Menu.Item>
+        </SubMenu>
+      </Menu>
     </Header>
   }
 
