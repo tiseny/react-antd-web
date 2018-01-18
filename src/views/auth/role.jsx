@@ -1,12 +1,12 @@
 import React from 'react'
 
-class Help extends React.PureComponent {
+class Role extends React.PureComponent {
 
   render() {
     return <section>
-      我的帮助
+      角色设置
     </section>
   }
 }
 
-export default Help
+export default Role

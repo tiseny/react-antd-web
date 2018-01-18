@@ -36,7 +36,7 @@ class Main extends React.PureComponent {
 		   	<PageSide collapsed={collapsed}/>
 		    <Layout>
 		      <PageHeader collapsed={collapsed} onToggle={this.handleToggle.bind(this)}/>
-		      <Layout.Content style={{ margin: '15px',height: '100%' }}>
+		      <Layout.Content style={{ margin: '10px',height: '100%' }}>
 		        <div style={{ padding: 24, background: '#fff', minHeight: 360, height: '100%'}}>
 		          {children}
 		        </div>

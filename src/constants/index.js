@@ -3,11 +3,11 @@ const SIDE_MENU = [{
   icon: 'profile',
   sub: [{
     name: '交易中',
-    router: '',
+    router: '/order/doing',
     icon: ''
   },{
     name: '已交易',
-    router: '',
+    router: '/order/done',
     icon: ''
   }]
 },{
@@ -15,15 +15,15 @@ const SIDE_MENU = [{
   icon: 'appstore-o',
   sub: [{
     name: '已上架商品',
-    router: '',
+    router: '/goods/grounding',
     icon: ''
   },{
     name: '新增商品',
-    router: '',
+    router: '/goods/add',
     icon: ''
   },{
     name: '库存管理',
-    router: '',
+    router: '/goods/storage',
     icon: ''
   }]
 },{
@@ -31,11 +31,11 @@ const SIDE_MENU = [{
   icon: 'user',
   sub: [{
     name: '已交易用户',
-    router: '',
+    router: '/user/trade',
     icon: ''
   },{
     name: '用户资料维护',
-    router: '',
+    router: '/user/data',
     icon: ''
   }]
 },{
@@ -43,23 +43,23 @@ const SIDE_MENU = [{
   icon: 'table',
   sub: [{
     name: '客户类别',
-    router: '',
+    router: '/data/customer',
     icon: ''
   },{
     name: '商品类别',
-    router: '',
+    router: '/data/goods',
     icon: ''
   },{
     name: '制造商管理',
-    router: '',
+    router: '/data/maker',
     icon: ''
   },{
     name: '仓库管理',
-    router: '',
+    router: '/data/storage',
     icon: ''
   },{
     name: '资金账户管理',
-    router: '',
+    router: '/data/fund',
     icon: ''
   }]
 },{
@@ -67,15 +67,15 @@ const SIDE_MENU = [{
   icon: 'lock',
   sub: [{
     name: '账户设置',
-    router: '',
+    router: '/auth/set',
     icon: ''
   },{
     name: '角色设置',
-    router: '',
+    router: '/auth/role',
     icon: ''
   },{
     name: '授权设置',
-    router: '',
+    router: '/auth/authorize',
     icon: ''
   }]
 }]

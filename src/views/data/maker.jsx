@@ -1,12 +1,12 @@
 import React from 'react'
 
-class Need extends React.PureComponent {
+class Maker extends React.PureComponent {
 
   render() {
     return <section>
-      我要求助
+      制造商管理
     </section>
   }
 }
 
-export default Need
+export default Maker

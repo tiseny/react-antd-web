@@ -35,8 +35,8 @@ class PageSide extends React.PureComponent {
           SIDE_MENU.map((item, key) => 
             <SubMenu key={key} title={<span><Icon type={item.icon} /><span>{item.name}</span></span>}>
               {
-                item.sub.map((subItem, subKey) => 
-                  <Menu.Item key={subKey}>
+                item.sub.map((subItem, subkey) => 
+                  <Menu.Item key={`${key}-${subkey}`}>
                     <Link to={subItem.router}>
                      {subItem.name}
                     </Link>

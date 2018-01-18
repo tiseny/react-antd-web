@@ -1,12 +1,12 @@
 import React from 'react'
 
-class Setup extends React.PureComponent {
+class Done extends React.PureComponent {
 
   render() {
     return <section>
-      设置
+      已交易
     </section>
   }
 }
 
-export default Setup
+export default Done
