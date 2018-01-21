@@ -37,29 +37,31 @@ class PageSide extends React.PureComponent {
           <h1>Ant Design Pro</h1>
         </a>
       </div>
-      <Menu
-        theme="dark"
-        onClick={this.handleClick}
-        defaultOpenKeys={[this.state.current]}
-        selectedKeys={[this.state.current]}
-        mode="inline"
-      >
-        {
-          SIDE_MENU.map((item, key) => 
-            <SubMenu key={key} title={<span><Icon type={item.icon} /><span>{item.name}</span></span>}>
-              {
-                item.sub.map((subItem, subkey) => 
-                  <Menu.Item key={`${key}-${subkey}`}>
-                    <Link to={subItem.router}>
-                     {subItem.name}
-                    </Link>
-                  </Menu.Item>
-                )
-              }
-            </SubMenu>
-          )
-        }
-      </Menu>
+      <div className="menu-wrap">
+        <Menu
+          theme="dark"
+          onClick={this.handleClick}
+          defaultOpenKeys={[this.state.current]}
+          selectedKeys={[this.state.current]}
+          mode="inline"
+        >
+          {
+            SIDE_MENU.map((item, key) => 
+              <SubMenu key={key} title={<span><Icon type={item.icon} /><span>{item.name}</span></span>}>
+                {
+                  item.sub.map((subItem, subkey) => 
+                    <Menu.Item key={`${key}-${subkey}`}>
+                      <Link to={subItem.router}>
+                       {subItem.name}
+                      </Link>
+                    </Menu.Item>
+                  )
+                }
+              </SubMenu>
+            )
+          }
+        </Menu>
+      </div>
     </Sider>
   }
 

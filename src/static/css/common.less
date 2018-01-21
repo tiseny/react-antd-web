@@ -1,10 +1,11 @@
 ::-webkit-scrollbar-thumb {
-    background-color: #e6e6e6;
+    background-color: rgba(148, 145, 145, .4);
+    border-radius: 6px;
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 :global .ant-breadcrumb {
@@ -98,9 +99,8 @@ body {
 
 .page-layout{
     height: 100%;
-
     .ant-layout-sider{
-        overflow: auto;
+        overflow: hidden;
         .logo{
             height: 64px;
             position: relative;
@@ -110,7 +110,6 @@ body {
             transition: all .3s;
             background: #002140;
             overflow: hidden;
-            margin-bottom: 15px;
             img{
                 display: inline-block;
                 vertical-align: middle;
@@ -127,6 +126,11 @@ body {
                 font-family: Myriad Pro,Helvetica Neue,Arial,Helvetica,sans-serif;
                 font-weight: 600;
             }
+        }
+        .menu-wrap{
+            overflow: auto;
+            padding-top: 15px;
+            height: calc(~"100% - 64px");
         }
     }
     .ant-layout-header{
