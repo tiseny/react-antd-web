@@ -14,7 +14,7 @@ class PageHeader extends React.PureComponent {
 
   render() {
 
-    const { collapsed, onToggle, logout } = this.props
+    const { collapsed, onToggle, onlogout } = this.props
 
     return <Header style={{ background: '#fff', padding: 0 }}>
       <Icon
@@ -22,7 +22,7 @@ class PageHeader extends React.PureComponent {
         type={collapsed ? 'menu-unfold' : 'menu-fold'}
         onClick={onToggle}
       />
-      <Menu mode="horizontal" onClick={logout} className="layout-header-menu">
+      <Menu mode="horizontal" onClick={onlogout} className="layout-header-menu">
         <SubMenu title={<span><Icon type="user" />admin</span>}>
           <Menu.Item key="logout">注销</Menu.Item>
         </SubMenu>

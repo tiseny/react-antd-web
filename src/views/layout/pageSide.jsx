@@ -11,7 +11,15 @@ const SubMenu = Menu.SubMenu;
 class PageSide extends React.PureComponent {
 
   state = {
-    current: '1'
+    current: ''
+  }
+
+  componentDidMount() {
+    let current = this.currentRouter()
+
+    this.setState({
+      current
+    })
   }
 
   render() {
@@ -20,14 +28,19 @@ class PageSide extends React.PureComponent {
     return  <Sider
       trigger={null}
       collapsible
-      collapsedWidth={47}
+      width={256}
       collapsed={collapsed}
     >
-      <div className="logo" />
+      <div className="logo">
+        <a href="/">
+          <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"/>
+          <h1>Ant Design Pro</h1>
+        </a>
+      </div>
       <Menu
         theme="dark"
         onClick={this.handleClick}
-        defaultOpenKeys={['sub1']}
+        defaultOpenKeys={[this.state.current]}
         selectedKeys={[this.state.current]}
         mode="inline"
       >
@@ -51,10 +64,24 @@ class PageSide extends React.PureComponent {
   }
 
   handleClick = (e) => {
-    console.log('click ', e);
     this.setState({
-      current: e.key,
+      current: e.key
     });
+  }
+
+  currentRouter = () => {
+    const pathname = window.location.pathname
+    let current = ''
+    // 如果是以前缀为
+    SIDE_MENU.forEach((item, key) => {
+      item.sub.forEach((subitem, subkey) => {
+        if (pathname.indexOf(subitem.router) === 0) {
+          current = `${key}-${subkey}`
+          return;
+        }
+      })
+    })
+    return current
   }
 }
 

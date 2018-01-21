@@ -21,7 +21,7 @@ class Main extends React.PureComponent {
     const username = localStorage.getItem('username')
     const pathname = window.location.pathname
 
-    if (!!username && new RegExp('^/login.*')) {
+    if (!!username && new RegExp('^/login.*').test(pathname)) {
       browserHistory.push('/')
     }
   }
@@ -35,8 +35,12 @@ class Main extends React.PureComponent {
  			result.needLayout ? <Layout className="page-layout">
 		   	<PageSide collapsed={collapsed}/>
 		    <Layout>
-		      <PageHeader collapsed={collapsed} onToggle={this.handleToggle.bind(this)}/>
-		      <Layout.Content style={{ margin: '10px',height: '100%' }}>
+		      <PageHeader 
+            collapsed={collapsed} 
+            onToggle={this.handleToggle.bind(this)}
+            onlogout={this.handleLogout.bind(this)}
+          />
+		      <Layout.Content style={{ margin: '20px',height: '100%' }}>
 		        <div style={{ padding: 24, background: '#fff', minHeight: 360, height: '100%'}}>
 		          {children}
 		        </div>
@@ -50,6 +54,11 @@ class Main extends React.PureComponent {
   	this.setState({
   		collapsed: !this.state.collapsed
   	})
+  }
+
+  handleLogout() {
+    localStorage.removeItem('username')
+    browserHistory.push('/login')
   }
 
   // 检查路由
