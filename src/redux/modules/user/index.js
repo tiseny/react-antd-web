@@ -10,8 +10,8 @@ import getQuery from '../../../helpers/getQuery'
 // ------------------------------------
 
 // pending request
-const FETCH_LOGIN_REQUEST = Symbol('FETCH_LOGIN_REQUEST')
-const FETCH_LOGIN_FAILURE = Symbol('FETCH_LOGIN_FAILURE')
+const FETCH_REQUEST = Symbol('FETCH_REQUEST')
+const FETCH_FAILURE = Symbol('FETCH_FAILURE')
 
 // 用户登录
 const FETCH_USER_LOGIN_SUCCESS = Symbol('FETCH_USER_LOGIN_SUCCESS')
@@ -23,7 +23,7 @@ const FETCH_USER_LOGOUT_SUCCESS = Symbol('FETCH_USER_LOGOUT_SUCCESS')
 // ------------------------------------
 
 // 用户登录
-/*export const login = (params, callback) => {
+export const login = (params, callback) => {
   
   const fetchOptions = getFetchOptions(getApiPath('user/login'), 'POST', {
     body: JSON.stringify(params)
@@ -34,16 +34,16 @@ const FETCH_USER_LOGOUT_SUCCESS = Symbol('FETCH_USER_LOGOUT_SUCCESS')
       ...fetchOptions,
       complete: callback,
       types: [
-        FETCH_LOGIN_REQUEST,
+        FETCH_REQUEST,
         FETCH_USER_LOGIN_SUCCESS,
-        FETCH_LOGIN_FAILURE
+        FETCH_FAILURE
       ]
     }
   }
-}*/
+}
 
 // 用户登出
-/*export const logout = (callback) => {
+export const logout = (callback) => {
   const fetchOptions = getFetchOptions(getApiPath('user/logout'), 'POST')
 
   return {
@@ -51,16 +51,14 @@ const FETCH_USER_LOGOUT_SUCCESS = Symbol('FETCH_USER_LOGOUT_SUCCESS')
       ...fetchOptions,
       complete: callback,
       types: [
-        FETCH_LOGIN_REQUEST,
+        FETCH_REQUEST,
         FETCH_USER_LOGOUT_SUCCESS,
-        FETCH_LOGIN_FAILURE
+        FETCH_FAILURE
       ]
     }
   }
-}*/
+}
 
-export const login = createAction(FETCH_USER_LOGIN_SUCCESS)
-export const logout = createAction(FETCH_USER_LOGOUT_SUCCESS)
 
 /**
  * 暴露actions到外面，方便使用react-redux connect绑定到Container Component
@@ -79,13 +77,13 @@ const initialState = {
 
 export default handleActions({
   // 登录/登出pending
-  [FETCH_LOGIN_REQUEST](state) {
+  [FETCH_REQUEST](state) {
     return {
       ...state,
       loginPending: true
     }
   },
-  [FETCH_LOGIN_FAILURE](state) {
+  [FETCH_FAILURE](state) {
     return {
       ...state,
       loginPending: false

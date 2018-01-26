@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { actions as userActionCreators } from '../../redux/modules/user'
-
 import { Spin, Form, Input, Button, message } from 'antd';
+import getQuery from '../../helpers/getQuery';
+
 import './index.less';
 
 const FormItem = Form.Item;
@@ -77,8 +78,6 @@ class Login extends React.PureComponent {
 
     const {actions, form} = this.props;
 
-    localStorage.removeItem('username')
-
     form.validateFieldsAndScroll((err, values) => {
 	    if (!err) {
 	    	let username = values.username
@@ -88,15 +87,15 @@ class Login extends React.PureComponent {
 	    		actions.login({
 	    			username,
 	    			password
-	    		})		
-
-	    		// 
-	    		localStorage.setItem('username', username)
-
-	    		browserHistory.push('/')
-
+	    		}, json => {
+            if (json.status) {
+              let return_url = getQuery('return_url') || '/'
+              browserHistory.push(return_url)
+            } else {
+              message.error(json.msg)              
+            }
+          })		
 	    	} else{
-
 	    		message.error('用户名或者密码错误')
 	    	}
 	    }
