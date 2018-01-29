@@ -43,8 +43,10 @@ export const login = (params, callback) => {
 }
 
 // 用户登出
-export const logout = (callback) => {
-  const fetchOptions = getFetchOptions(getApiPath('user/logout'), 'POST')
+export const logout = (params, callback) => {
+  const fetchOptions = getFetchOptions(getApiPath('user/logout'), 'POST', {
+    body: JSON.stringify(params)
+  })
 
   return {
     [CALL_API]: {

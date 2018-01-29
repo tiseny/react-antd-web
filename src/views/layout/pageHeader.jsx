@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Layout, Icon, Menu } from 'antd'
-
+import Cookies from 'js-cookie';
 const SubMenu = Menu.SubMenu;
 const Header = Layout.Header;
 
@@ -13,8 +13,8 @@ class PageHeader extends React.PureComponent {
   }
 
   render() {
-
     const { collapsed, onToggle, onlogout } = this.props
+    const username = Cookies.get('username') || ''
 
     return <Header style={{ background: '#fff', padding: 0 }}>
       <Icon
@@ -23,7 +23,7 @@ class PageHeader extends React.PureComponent {
         onClick={onToggle}
       />
       <Menu mode="horizontal" onClick={onlogout} className="layout-header-menu">
-        <SubMenu title={<span><Icon type="user" />admin</span>}>
+        <SubMenu title={<span><Icon type="user" />{username}</span>}>
           <Menu.Item key="logout">注销</Menu.Item>
         </SubMenu>
       </Menu>

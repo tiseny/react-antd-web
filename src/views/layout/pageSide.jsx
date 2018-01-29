@@ -14,6 +14,14 @@ class PageSide extends React.PureComponent {
     current: ''
   }
 
+  componentWillReceiveProps(nextProps) {
+    let current = this.currentRouter()
+
+    this.setState({
+      current
+    })
+  }
+
   componentDidMount() {
     let current = this.currentRouter()
 
@@ -34,7 +42,7 @@ class PageSide extends React.PureComponent {
       <div className="logo">
         <a href="/">
           <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"/>
-          <h1>Ant Design Pro</h1>
+          <h1>买塑网<span></span></h1>
         </a>
       </div>
       <div className="menu-wrap">

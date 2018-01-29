@@ -6,6 +6,7 @@ import { browserHistory } from 'react-router';
 import { actions as userActionCreators } from '../../redux/modules/user'
 import { Spin, Form, Input, Button, message } from 'antd';
 import getQuery from '../../helpers/getQuery';
+import Cookies from 'js-cookie';
 
 import './index.less';
 
@@ -83,21 +84,23 @@ class Login extends React.PureComponent {
 	    	let username = values.username
 	    	let password = values.password
 
-	    	if (username === 'admin' && password === '123456') {
-	    		actions.login({
-	    			username,
-	    			password
-	    		}, json => {
-            if (json.status) {
-              let return_url = getQuery('return_url') || '/'
-              browserHistory.push(return_url)
-            } else {
-              message.error(json.msg)              
-            }
-          })		
-	    	} else{
-	    		message.error('用户名或者密码错误')
-	    	}
+    		actions.login({
+    			username,
+    			password
+    		}, json => {
+          if (json.status) {
+            let return_url = getQuery('return_url') || '/'
+            browserHistory.push(return_url)
+            // 将登录信息存入cookie  
+            Cookies.set('username',json.data.username)
+            Cookies.set('uid',json.data.uid)
+            Cookies.set('session_id', json.data.session_id)
+            // 复制一份。用作前端判断是否有登录的凭据
+            Cookies.set('token', json.data.session_id)
+          } else {
+            message.error(json.msg)              
+          }
+        })		 	
 	    }
     });
 	}
